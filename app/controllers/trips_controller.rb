@@ -156,7 +156,11 @@ class TripsController < ApplicationController
     if @trip.participants_ids_array.include? @user.id
     @newparts=@trip.participants.clone
     else
+    if @trip.participants_ids_array.size == 0
+    @newparts=@user.id.to_s
+    else
     @newparts=@trip.participants.clone<<","<<@user.id.to_s
+    end
     @success=true
     end
     end
