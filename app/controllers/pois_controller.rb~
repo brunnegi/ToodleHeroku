@@ -10,7 +10,7 @@ class PoisController < ApplicationController
   @image = params[:url]
   @poi.image=@image
   @image_orig = params[:url_orig]
-  @poi.image_orig=@image_orig
+  @poi.image_orig
   @poi.update_attributes(params[:poi])
     #@trip_id = Trip.find(params[:poi_trip_id])
 

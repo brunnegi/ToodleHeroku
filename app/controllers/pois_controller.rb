@@ -75,7 +75,7 @@ class PoisController < ApplicationController
   # GET /pois/new.json
   def new
     @poi = Poi.new
-		@poi.save
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render :json => @poi }
