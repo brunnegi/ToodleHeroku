@@ -1,0 +1,53 @@
+<%= form_for(@trip) do |f| %>
+  <% if @trip.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@trip.errors.count, "error") %> prohibited this trip from being saved:</h2>
+
+      <ul>
+      <% @trip.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+<!--    <%= f.label :owner %><br />
+    <%= f.number_field :owner %>-->
+    <%= f.hidden_field :owner, value: current_user().id %>
+  </div>
+  <div class="field">
+    <%= f.label :start_date %><br />
+    <%= f.datetime_select :start_date %>
+  </div>
+  <div class="field">
+    <%= f.label :end_date %><br />
+    <%= f.datetime_select :end_date %>
+  </div>
+  <div class="field">
+    <%= f.label :details %><br />
+    <%= f.text_area :details %>
+  </div>
+  <div class="field">
+    <%= f.label :participants %><br />
+    <%= f.text_field :participants %>
+  </div>
+<!--  <div class="field">
+    <%= f.label :poi %><br />
+    <%= f.text_field :poi %>
+  </div>
+  <div class="field">
+    <%= f.label :dpoi %><br />
+    <%= f.number_field :dpoi %>
+  </div>-->
+<!--    <%= f.hidden_field :participants %> -->
+    <%= f.hidden_field :poi %>
+    <%= f.hidden_field :dpoi %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

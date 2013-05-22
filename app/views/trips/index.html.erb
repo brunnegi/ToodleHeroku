@@ -1,0 +1,38 @@
+<h1>Listing trips</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+<!--    <th>Owner</th>-->
+    <th>Start date</th>
+    <th>End date</th>
+<!--    <th>Details</th>-->
+    <th># of Participants</th>
+<!--    <th>Poi</th>
+    <th>Dpoi</th>-->
+<!--    <th></th>
+    <th></th>
+    <th></th>-->
+  </tr>
+
+<% @trips.each do |trip| %>
+  <tr>
+    <td><%= link_to trip.name, trip %></td>
+<!--    <td><%= trip.name %></td>
+    <td><%= trip.owner %></td>-->
+    <td><%= trip.start_date %></td>
+    <td><%= trip.end_date %></td>
+<!--    <td><%= trip.details %></td>-->
+    <td><%= trip.participants.split(',').size %></td>
+<!--    <td><%= trip.poi %></td>
+    <td><%= trip.dpoi %></td>-->
+<!--    <td><%= link_to 'Show', trip %></td>
+    <td><%= link_to 'Edit', edit_trip_path(trip) %></td>
+    <td><%= link_to 'Destroy', trip, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>-->
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Create a new Trip', new_trip_path %>

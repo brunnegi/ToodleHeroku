@@ -1,0 +1,47 @@
+<%= form_for(@poi) do |f| %>
+  <% if @poi.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@poi.errors.count, "error") %> prohibited this poi from being saved:</h2>
+
+      <ul>
+      <% @poi.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <% @trip_id = params[:poi_trip_id] %>
+    <% if @trip_id.nil? %>
+    <% @trip_id=@poi.trip.id %>
+    <% end %>
+    <%= f.hidden_field :trip_id, value: @trip_id %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :location %><br />
+    <%= f.text_field :location %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <% if :action == "edit" %>
+  	<%= link_to 'add new user', action: "add_new_image", controller:"pois" %>
+    <% end %>
+    <%= f.label :image %><br />
+    <%= f.text_field :image %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :voters %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

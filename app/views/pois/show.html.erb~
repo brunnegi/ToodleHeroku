@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @poi.name %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @poi.location %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @poi.description %>
+</p>
+
+<p>
+  <b>Image:</b>
+  <%= image_tag(@poi.image, alt: @poi.image) %>
+  <% if @poi.image != "" %>
+  <a href=<%= @poi.image_orig %>> Click here for original image site </a>
+  <% end %>
+<% if current_user().id == @poi.trip.owner %>
+  <%= link_to 'add new image', action: "add_new_image", controller:"pois",  poi_id: @poi.id %>
+  <% end %>
+</p>
+
+<p>
+  <b>Voters:</b>
+  <% @poi.voters_array.each do |voter| %>
+    <%= link_to voter.name, voter %>,
+  <% end %>
+</p>
+
+
+<% if current_user().id == @poi.trip.owner %>
+<%= link_to 'Edit', edit_poi_path(@poi) %> |
+<% end %>
+<%= link_to 'Back', @poi.trip %>

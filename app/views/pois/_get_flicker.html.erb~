@@ -1,0 +1,12 @@
+<% FlickRaw.api_key="3ec658c79271f10417101277114e3bde" %>
+<% FlickRaw.shared_secret = "c6a0a3f7b6b52dca" %>
+ <% photos = flickr.photos.search(:per_page => 10, :tag_mode => "all", :tags => ["Louvre", "Paris", "Museum"] ) %>
+  <div class="span8">
+  <ul>
+ <% photos.each do |pic| %>	
+    <% photo_info = flickr.photos.getInfo(:photo_id => pic.id) %>
+    <% photo_url = FlickRaw.url_z(photo_info) %>
+    <li> <a href=photo_url><img src=photo_url></a> </li>
+ <% end %>
+ </ul>
+ </div>

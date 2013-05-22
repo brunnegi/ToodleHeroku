@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+<%= form_tag(action:'add_new_image_do') do %>
+  <%= label_tag(:new_user,"Type in a comma separated list of Tags describing your POI:") %>
+  <%= text_field_tag(:tag) %>
+  <%= submit_tag('Add') %>
+<% end %>
+
+<%= link_to 'Back', @poi %>

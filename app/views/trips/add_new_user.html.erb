@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<%= form_tag(action:'add_new_user_do') do %>
+  <%= label_tag(:new_user,"User to add:") %>
+  <%= text_field_tag(:new_user) %>
+  <%= submit_tag('Add') %>
+<% end %>
+
+<%= link_to 'Back', @trip %>
+
+<ul class="users">
+<%= render @users %>
+</ul>

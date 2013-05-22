@@ -1,0 +1,78 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @trip.name %>
+</p>
+
+<p>
+  <b>Owner:</b>
+<!--  <%= @owner.name %>-->
+  <%= link_to @owner.name, @owner %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @trip.start_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%= @trip.end_date %>
+</p>
+
+<p>
+  <b>Details:</b>
+  <%= @trip.details %>
+</p>
+
+<p>
+  <b>Participants:</b>
+  <% @parts.each do |part| %>
+    <% @partu=User.find(part) %>
+    <%= link_to @partu.name, @partu %>,
+  <% end %>
+  <% if current_user.id == @owner.id %>
+  	<%= link_to 'add new user', action: "add_new_user", controller:"trips" , trip_id:@trip.id %>
+  <% end %>
+<!--<% if @participates == 0 %>
+PARTICIPATE_LINK
+<% end %>-->
+</p>
+
+<p>
+  <b>POI:</b>
+<!--  <%= @trip.poi %>-->
+  <% @trip.pois.sort{ |a,b| a.voters_id_array.size <=> b.voters_id_array.size }.reverse.each do |poi| %>
+    <p><%= link_to poi.name, poi %>
+    <% if @trip.participates_id? current_user.id %>
+    <% if poi.definitive == true %>
+    (definitive)
+    <% end %>
+    <% end %>
+    <% if current_user.id == @owner.id %>
+		<% if poi.definitive == true %>
+		<%= link_to 'unset', action: "unset_definitive_poi", controller:"trips" , poi_id: poi.id, trip_id:@trip.id %>
+		<% else %>
+		<%= link_to 'set as definitive', action: "set_definitive_poi", controller:"trips" , poi_id: poi.id, trip_id:@trip.id %>
+		<% end %>
+    <% end %>
+    Votes: <%= poi.voters_id_array.size %>
+    <% if %>
+    <% if @trip.participates_id? current_user.id %>
+      <%= link_to 'Vote', action: "vote_poi", controller:"trips" , poi_id: poi.id, trip_id:@trip.id %>
+    <% end %>
+    <% end %>
+    </p>
+  <% end %>
+</p>
+<% if current_user.id == @owner.id %>
+<p>
+<%= link_to 'New POI', action: "new", controller:"pois" , poi_trip_id: @trip.id %>
+</p>
+<% end %>
+
+<% if current_user().id == @owner.id %>
+<%= link_to 'Edit', edit_trip_path(@trip) %> |
+<% end %>
+<%= link_to 'Back', trips_path %>
